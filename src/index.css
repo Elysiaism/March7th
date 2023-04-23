@@ -1,0 +1,34 @@
+@font-face {
+    font-family: 'DINosaur';
+    src: url('./static/fonts/DINosaur-Light.otf') format('truetype');
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: 'DINosaur';
+    src: url('./static/fonts/DINosaur-Book.otf') format('truetype');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'HarmonyOS';
+    src: url('./static/fonts/HarmonyOS_Sans_SC_Light.ttf') format('truetype');
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: 'HarmonyOS';
+    src: url('./static/fonts/HarmonyOS_Sans_SC_Regular.ttf') format('truetype');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'HarmonyOS';
+    src: url('./static/fonts/HarmonyOS_Sans_SC_Medium.ttf') format('truetype');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'YaHeiConsolas';
+    src: url('./static/fonts/YaHeiConsolas.ttf') format('truetype');
+}
