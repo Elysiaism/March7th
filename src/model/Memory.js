@@ -13,11 +13,11 @@ export default class Memory {
     ].join('\n')
 
     constructor({
-        name = "",
-        pieces = [],
-        stigmata = [],
-        preference = {}
-    } = {}) {
+                    name = "",
+                    pieces = [],
+                    stigmata = [],
+                    preference = {}
+                } = {}) {
         this.name = name
         this.pieces = pieces.map(piece => new Piece(piece))
         this.stigmata = stigmata.map(stigma => new Stigma(stigma))
@@ -27,7 +27,7 @@ export default class Memory {
         }
     }
 
-    interpret(data, key) {
+    interpret(data, key, onSucceed = console.log, onFail = console.error) {
         try {
             const key1 = binary16(key)
             const key2 = binary16(key.split('').reverse().join(''))
@@ -37,18 +37,19 @@ export default class Memory {
             data = binary16(data.map((char, i) => xor(char, this.EIDOLON[i % this.EIDOLON.length])))
             data = binary16(data)
             data = binary16(data.map((char, i) => xor(char, key2[i % key2.length])))
-            Object.assign(this, new Memory(JSON.parse(data)))
+            const newMemory = new Memory(JSON.parse(data))
+            Object.assign(this, newMemory)
+            onSucceed(newMemory)
         } catch (error) {
-
+            onFail(error)
         }
-
     }
 
     transcribe(key) {
         try {
             const key1 = binary16(key)
             const key2 = binary16(key.split('').reverse().join(''))
-            data = binary16(JSON.stringify(this))
+            let data = binary16(JSON.stringify(this))
             data = binary16(data.map((char, i) => xor(char, key2[i % key2.length])))
             data = binary16(data)
             data = binary16(data.map((char, i) => xor(char, this.EIDOLON[i % this.EIDOLON.length])))
@@ -63,7 +64,7 @@ export default class Memory {
     addOrUpdatePiece(id, title, content, stigmata) {
         const i = this.pieces.findIndex(piece => piece.id === id)
         if (i === -1) {
-            const piece = new Piece({ title, content, stigmata })
+            const piece = new Piece({title, content, stigmata})
             this.pieces.push(piece)
         } else {
             const piece = this.pieces[i]
@@ -102,7 +103,7 @@ export default class Memory {
     addOrUpdateStigma(id, name, hidden, important) {
         const i = this.stigmata.findIndex(stigma => stigma.id === id)
         if (i === -1) {
-            const stigma = new Stigma({ name, hidden, important })
+            const stigma = new Stigma({name, hidden, important})
             this.stigmata.push(stigma)
         } else {
             const stigma = this.stigmata[i]
@@ -131,7 +132,7 @@ export default class Memory {
     }
 
     updatePreferences(preference) {
-        preference.forEach(({ key, value }) => {
+        preference.forEach(({key, value}) => {
             if (this.preference.hasOwnProperty(key)) {
                 this.preference[key] = value
             }
