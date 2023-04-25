@@ -36,7 +36,40 @@ export default function App() {
         }
     })
 
-    const [memory, _memory] = useState(new Memory())
+    const [memory, _memory] = useState(new Memory({
+        pieces: Array.from(Array(5).keys()).map(() =>
+            ({
+                title: "Lorem Ipsum",
+                content: "<div>Aliquam in metus nec nisl commodo tempor. Nam posuere vel sapien sit amet vulputate. Nulla convallis sollicitudin nibh non fermentum. Pellentesque in mattis libero. Fusce a ipsum nec ipsum cursus commodo non at purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam ornare turpis ut neque pretium sodales.</div>",
+                stigmata: ["nbku82j3rkee"]
+            })).concat(
+            Array.from(Array(5).keys()).map(() =>
+                ({
+                    title: "Ipsum Lorem",
+                    content: "<div>Aliquam in metus nec nisl commodo tempor. Nam posuere vel sapien sit amet vulputate. Nulla convallis sollicitudin nibh non fermentum. Pellentesque in mattis libero. Fusce a ipsum nec ipsum cursus commodo non at purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam ornare turpis ut neque pretium sodales.</div>",
+                    stigmata: ["asdf98wu8ief"]
+                }))
+        ).concat(
+            Array.from(Array(5).keys()).map(() =>
+                ({
+                    title: "Lorem",
+                    content: "<div>Aliquam in metus nec nisl commodo tempor. Nam posuere vel sapien sit amet vulputate. Nulla convallis sollicitudin nibh non fermentum. Pellentesque in mattis libero. Fusce a ipsum nec ipsum cursus commodo non at purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam ornare turpis ut neque pretium sodales.</div>",
+                    stigmata: ["3456789fiuhjds"]
+                }))
+        ).concat(
+            Array.from(Array(5).keys()).map(() =>
+                ({
+                    title: "Ipsum",
+                    content: "<div>Aliquam in metus nec nisl commodo tempor. Nam posuere vel sapien sit amet vulputate. Nulla convallis sollicitudin nibh non fermentum. Pellentesque in mattis libero. Fusce a ipsum nec ipsum cursus commodo non at purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam ornare turpis ut neque pretium sodales.</div>",
+                    stigmata: []
+                }))
+        ),
+        stigmata: [
+            {id:"3456789fiuhjds",name: 'Company', hidden: false},
+            {id:"asdf98wu8ief",name: 'Family', hidden: true},
+            {id:"nbku82j3rkee",name: 'Personal', hidden: false}
+        ]
+    }))
     const [credential, _credential] = useState("")
     const [message, _message] = useState({
         open: false,
@@ -76,7 +109,9 @@ export default function App() {
                                     onClose={() => _isLocked(false)}
                                 />
                                 :
-                                <Core/>
+                                <Core
+                                    data={{memory, _memory, credential, _credential}}
+                                />
                         }
                     </>
                     :

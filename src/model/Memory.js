@@ -88,11 +88,19 @@ export default class Memory {
         const pieces = this.pieces.filter(piece => {
             if (matchAll) {
                 if (stigmata.length === 0 || stigmata.every(stigma => piece.stigmata.includes(stigma))) {
-                    return piece.titleMatch(keyword) || piece.contentMatch(keyword)
+                    if (keyword === null) {
+                        return true
+                    } else {
+                        return piece.titleMatch(keyword) || piece.contentMatch(keyword)
+                    }
                 }
             } else {
                 if (stigmata.length === 0 || stigmata.some(stigma => piece.stigmata.includes(stigma))) {
-                    return piece.titleMatch(keyword) || piece.contentMatch(keyword)
+                    if (keyword === null) {
+                        return true
+                    } else {
+                        return piece.titleMatch(keyword) || piece.contentMatch(keyword)
+                    }
                 }
             }
             return false

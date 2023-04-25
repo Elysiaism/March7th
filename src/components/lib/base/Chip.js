@@ -1,15 +1,14 @@
-import { StarBorderOutlined } from "@mui/icons-material"
-import { Button, Typography, useTheme } from "@mui/material"
+import {Button, Typography, useTheme} from "@mui/material"
 
 function Chip({
-    className,
-    color = "primary",
-    button,
-    onClick,
-    name,
-    sx,
-    startIcon
-}) {
+                  className,
+                  color = "primary",
+                  button,
+                  onClick,
+                  name,
+                  sx,
+                  startIcon
+              }) {
 
     const theme = useTheme()
     const style = {

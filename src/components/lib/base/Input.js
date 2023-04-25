@@ -21,7 +21,7 @@ export default function Input({
             focused
             value={value}
             onChange={event => onChange(event.target.value)}
-            autoComplete={"none"}
+            autoComplete={"off"}
             InputProps={{
                 readOnly: readOnly ?? false,
                 disableUnderline: true,
