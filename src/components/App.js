@@ -1,6 +1,6 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import Memory from '../model/Memory';
-import {createTheme, ThemeProvider} from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material';
 import Loading from './lib/base/Loading';
 import Crust from "./pages/Crust";
 import Core from "./pages/Core";
@@ -8,7 +8,7 @@ import Notification from "./lib/base/Notification";
 import AbsButton from "./lib/base/AbsButton";
 import Fonts from "./lib/base/Fonts";
 import RemixIcon from "../static/icons/RemixIcon";
-import {blue, grey} from "@mui/material/colors";
+import { blue, grey } from "@mui/material/colors";
 
 export default function App() {
 
@@ -38,36 +38,36 @@ export default function App() {
 
     const [memory, _memory] = useState(new Memory({
         pieces: Array.from(Array(5).keys()).map(() =>
+        ({
+            title: "Lorem Ipsum",
+            content: "<div>Aliquam in metus nec nisl commodo tempor. Nam posuere vel sapien sit amet vulputate. Nulla convallis sollicitudin nibh non fermentum. Pellentesque in mattis libero. Fusce a ipsum nec ipsum cursus commodo non at purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam ornare turpis ut neque pretium sodales.</div>",
+            stigmata: ["nbku82j3rkee"]
+        })).concat(
+            Array.from(Array(5).keys()).map(() =>
             ({
-                title: "Lorem Ipsum",
+                title: "Ipsum Lorem",
                 content: "<div>Aliquam in metus nec nisl commodo tempor. Nam posuere vel sapien sit amet vulputate. Nulla convallis sollicitudin nibh non fermentum. Pellentesque in mattis libero. Fusce a ipsum nec ipsum cursus commodo non at purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam ornare turpis ut neque pretium sodales.</div>",
-                stigmata: ["nbku82j3rkee"]
-            })).concat(
-            Array.from(Array(5).keys()).map(() =>
-                ({
-                    title: "Ipsum Lorem",
-                    content: "<div>Aliquam in metus nec nisl commodo tempor. Nam posuere vel sapien sit amet vulputate. Nulla convallis sollicitudin nibh non fermentum. Pellentesque in mattis libero. Fusce a ipsum nec ipsum cursus commodo non at purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam ornare turpis ut neque pretium sodales.</div>",
-                    stigmata: ["asdf98wu8ief"]
-                }))
+                stigmata: ["asdf98wu8ief"]
+            }))
         ).concat(
             Array.from(Array(5).keys()).map(() =>
-                ({
-                    title: "Lorem",
-                    content: "<div>Aliquam in metus nec nisl commodo tempor. Nam posuere vel sapien sit amet vulputate. Nulla convallis sollicitudin nibh non fermentum. Pellentesque in mattis libero. Fusce a ipsum nec ipsum cursus commodo non at purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam ornare turpis ut neque pretium sodales.</div>",
-                    stigmata: ["3456789fiuhjds"]
-                }))
+            ({
+                title: "Lorem",
+                content: "<div>Aliquam in metus nec nisl commodo tempor. Nam posuere vel sapien sit amet vulputate. Nulla convallis sollicitudin nibh non fermentum. Pellentesque in mattis libero. Fusce a ipsum nec ipsum cursus commodo non at purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam ornare turpis ut neque pretium sodales.</div>",
+                stigmata: ["3456789fiuhjds"]
+            }))
         ).concat(
             Array.from(Array(5).keys()).map(() =>
-                ({
-                    title: "Ipsum",
-                    content: "<div>Aliquam in metus nec nisl commodo tempor. Nam posuere vel sapien sit amet vulputate. Nulla convallis sollicitudin nibh non fermentum. Pellentesque in mattis libero. Fusce a ipsum nec ipsum cursus commodo non at purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam ornare turpis ut neque pretium sodales.</div>",
-                    stigmata: []
-                }))
+            ({
+                title: "Ipsum",
+                content: "<div>Aliquam in metus nec nisl commodo tempor. Nam posuere vel sapien sit amet vulputate. Nulla convallis sollicitudin nibh non fermentum. Pellentesque in mattis libero. Fusce a ipsum nec ipsum cursus commodo non at purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam ornare turpis ut neque pretium sodales.</div>",
+                stigmata: []
+            }))
         ),
         stigmata: [
-            {id:"3456789fiuhjds",name: 'Company', hidden: false},
-            {id:"asdf98wu8ief",name: 'Family', hidden: true},
-            {id:"nbku82j3rkee",name: 'Personal', hidden: false}
+            { id: "3456789fiuhjds", name: 'Company', hidden: false },
+            { id: "asdf98wu8ief", name: 'Family', hidden: true },
+            { id: "nbku82j3rkee", name: 'Personal', hidden: false }
         ]
     }))
     const [credential, _credential] = useState("")
@@ -92,39 +92,17 @@ export default function App() {
     }
 
     const notificationOff = () => {
-        _message(message => ({...message, open: false}))
+        _message(message => ({ ...message, open: false }))
     }
+    
 
     return (
         <ThemeProvider theme={theme}>
-            <Fonts fonts={["DINosaur", "HarmonyOS", "YaHeiConsolas"]} onLoadComplete={() => _isFontLoaded(true)}/>
-            {
-                isFontLoaded ?
-                    <>
-                        {
-                            isLocked ?
-                                <Crust
-                                    data={{memory, _memory, credential, _credential}}
-                                    notification={{on: notificationOn, off: notificationOff}}
-                                    onClose={() => _isLocked(false)}
-                                />
-                                :
-                                <Core
-                                    data={{memory, _memory, credential, _credential}}
-                                />
-                        }
-                    </>
-                    :
-                    <Loading/>
-            }
-            <Notification
-                open={message.open}
-                type={message.type}
-                text={message.text}
-            />
-            <AbsButton>
-                <RemixIcon.Draft/>
-            </AbsButton>
+            <FontLoader fonts={["DINosaur", "HarmonyOS", "YaHeiConsolas"]} onLoadComplete={() => _isFontLoaded(true)} />
+            {!isFontLoaded ? <Loading /> : null}
+            {isFontLoaded && isLocked ? <DataDecryptionPortal /> : null}
+            {isFontLoaded && !isLocked ? <UserInteractionPortal /> : null}
+            <Notifier value={message} />
         </ThemeProvider>
     )
 }
